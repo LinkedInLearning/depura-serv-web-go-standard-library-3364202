@@ -39,6 +39,6 @@ func main() {
 		DB: db,
 	}
 
-	router.GET("/get-usr-nfo", userHandler.Info)
+	router.POST("/get-usr-nfo", userHandler.Info)
 	router.Run(":8080")
 }
