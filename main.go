@@ -12,9 +12,9 @@ import (
 )
 
 func mustInitDB() *sql.DB {
-	user := os.Getenv("APP_USER")
-	password := os.Getenv("APP_PASSWORD")
-	dbname := os.Getenv("APP_DBNAME")
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	dbname := os.Getenv("DB_NAME")
 
 	connStr := fmt.Sprintf("user=%s dbname=%s password=%s sslmode=disable", user, dbname, password)
 	db, err := sql.Open("postgres", connStr)
