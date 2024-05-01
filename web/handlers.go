@@ -26,7 +26,7 @@ func (h *UserHandler) Info(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusInternalServerError, gin.H{
 		"User": ui,
 	})
 }
