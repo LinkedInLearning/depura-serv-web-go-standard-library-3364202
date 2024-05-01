@@ -10,19 +10,23 @@ DESCRIPCIÓN DEL CURSO
 
 ## Instrucciones
 
-Este repositorio tiene ramas (branches) para cada uno de los vídeos del curso. Puedes usar el menú emergente de la rama en GitHub para cambiar a una rama específica y echar un vistazo al curso en esa etapa, o puedes añadir `/tree/nombre_de_la_rama` a la URL para ir a la rama a la que quieres acceder.
+Este repositorio tiene dos directorios, uno para cada uno de los estados del proyecto a depurar.
 
-## Ramas
+## Directorios
 
-Las ramas están estructuradas para corresponder a los vídeos del curso. La convención de nomenclatura es Capítulo#_Vídeo#. Por ejemplo, la rama denominada `02_03` corresponde al segundo capítulo y al tercer vídeo de ese capítulo. Algunas ramas tendrán un estado inicial y otro final. Están marcadas con las letras i («inicio») y f («fin»). La branch i tiene el mismo código que al principio del vídeo. La branch f tiene el mismo código que al final del vídeo. La rama master tiene el estado final del código que aparece en el curso.
+El curso está dividido en dos secciones, cada una con su propio directorio:
+- `Bugs`: contiene el código con errores.
+- `Fixed`: contiene el código corregido.
 
 ## Instalación
 
 1. Para utilizar estos archivos de ejercicios, debes tener descargado lo siguiente:
-   - [software]
+   - [Go](https://golang.org/dl/).
+   - [Git](https://git-scm.com/).
+   - [Docker](https://www.docker.com/products/docker-desktop).
+   - [Docker Compose](https://docs.docker.com/compose/install/).
 
 2. Clona este repositorio en tu máquina local usando la Terminal (macOS) o CMD (Windows), o una herramienta GUI como SourceTree.
-3. [Instrucciones específicas del curso].
 
 ### Docente
 
