@@ -1,0 +1,16 @@
+# Lista de errores
+    - La base de datos no está creada.
+        - Necesitamos un contenedor de postgres que nos de el acceso a la base de datos. Utilizaremos Docker Compose para esto.
+        - Necesitamos un Makefile para que sea más fácil la ejecución de los comandos.
+        - Crear la base de datos con un bind mount en el compose, desde el directorio `resources`.
+    - La cadena de conexión a la base de datos no es correcta, ya que está hardcodeada.
+        - Hay que utilizar los valores del Makefile, leyendo de variables de entorno.
+    - El verbo HTTP es POST y no GET.
+        - Probar nevagar a `http://localhost:8080/get-usr-nfo?uid=6ba7b810-9dad-11d1-80b4-00c04fd430c8` y se obtiene un error 404.
+        - Probar cURL con `curl -X POST http://localhost:8080/get-usr-nfo?uid=6ba7b810-9dad-11d1-80b4-00c04fd430c8` y se obtiene un error 500 Bad Request, porque la tabla `users` no existe en la base de datos.
+    - El endpoint es `/get-usr-nfo` y no `/get-user-info`.
+    - El User ID, obtenido de la query string, se está convirtiendo a entero, en lugar de un UUID.
+        - El proyecto ni siquiera compila, porque el tipo de dato de `uid` es `uuid` y no `id`.
+    - La SQL de acceso a la info del usuario es incorrecta, utiliza un campo que no existe.
+        - Cambiar el campo `id` por `uid`.
+    - El HTTP status code de respuesta exitosa es 500, en lugar de 200.
