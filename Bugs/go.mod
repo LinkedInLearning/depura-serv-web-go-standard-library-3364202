@@ -1,6 +1,6 @@
 module github.com/linkedinlearning/depura-go/webservice
 
-go 1.21.7
+go 1.22
 
 require (
 	github.com/google/uuid v1.6.0
