@@ -2,9 +2,10 @@ package web
 
 import (
 	"database/sql"
+	"encoding/json"
+	"log"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/linkedinlearning/depura-go/webservice/user"
 )
@@ -13,21 +14,38 @@ type UserHandler struct {
 	DB *sql.DB
 }
 
-func (h *UserHandler) Info(c *gin.Context) {
-	uid := c.Query("uid")
+func (h *UserHandler) Info(w http.ResponseWriter, r *http.Request) {
+	uid := r.URL.Query().Get("uid")
 	userID, err := uuid.Parse(uid)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Unable to parse userID"})
+		badRequestErrorHandler(w, err)
 		return
 	}
 
 	ui, err := user.GetInfo(h.DB, userID)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		internalServerErrorHandler(w, err)
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"User": ui,
-	})
+	// Set the status code to 200
+	w.WriteHeader(http.StatusOK)
+
+	jsonBytes, err := json.Marshal(ui)
+	if err != nil {
+		log.Printf("Cannot encode User Info to JSON: %v", err)
+		internalServerErrorHandler(w, err)
+		return
+	}
+	w.Write(jsonBytes)
+}
+
+func (h *UserHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path == "/get-user-info" && r.Method == http.MethodGet {
+		h.Info(w, r)
+		return
+	}
+
+	w.WriteHeader(http.StatusMethodNotAllowed)
+	w.Write([]byte("405 Method not Allowed"))
 }

@@ -2,9 +2,12 @@ package main
 
 import (
 	"database/sql"
+	"flag"
+	"fmt"
 	"log"
+	"net"
+	"net/http"
 
-	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 	"github.com/linkedinlearning/depura-go/webservice/web"
 )
@@ -27,12 +30,26 @@ func mustInitDB() *sql.DB {
 func main() {
 	db := mustInitDB()
 
-	router := gin.Default()
+	var (
+		host = flag.String("host", "", "host http address to listen on")
+		port = flag.String("port", "8080", "port number for http listener")
+	)
+	flag.Parse()
 
-	userHandler := web.UserHandler{
-		DB: db,
+	addr := net.JoinHostPort(*host, *port)
+
+	if err := runHttp(addr, db); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func runHttp(listenAddr string, db *sql.DB) error {
+	s := http.Server{
+		Addr:    listenAddr,
+		Handler: web.NewRouter(db),
 	}
 
-	router.POST("/get-usr-nfo", userHandler.Info)
-	router.Run(":8080")
+	fmt.Printf("Starting HTTP listener at %s\n", listenAddr)
+
+	return s.ListenAndServe()
 }

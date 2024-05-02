@@ -12,7 +12,7 @@ type UserInfo struct {
 	Age    int       `json:"Age"`
 }
 
-func GetInfo(db *sql.DB, userID uuid.UUID) (UserInfo, error) {
+func GetInfo(db *sql.DB, userID int) (UserInfo, error) {
 	var ui UserInfo
 	var age int
 	err := db.QueryRow("SELECT age FROM users WHERE id = $1", userID).Scan(&age)
@@ -25,7 +25,7 @@ func GetInfo(db *sql.DB, userID uuid.UUID) (UserInfo, error) {
 	}
 
 	ui = UserInfo{
-		UserID: userID,
+		UserID: uuid.New(),
 		Age:    age,
 	}
 

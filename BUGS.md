@@ -10,7 +10,9 @@
         - Probar cURL con `curl -X POST http://localhost:8080/get-usr-nfo?uid=6ba7b810-9dad-11d1-80b4-00c04fd430c8` y se obtiene un error 500 Bad Request, porque la tabla `users` no existe en la base de datos.
     - El endpoint es `/get-usr-nfo` y no `/get-user-info`.
     - El User ID, obtenido de la query string, se está convirtiendo a entero, en lugar de un UUID.
-        - El proyecto ni siquiera compila, porque el tipo de dato de `uid` es `uuid` y no `id`.
+        - El proyecto compila, pero hay un bug en la capa de datos, porque el tipo de dato de `uid` es `uuid` y no `id`.
     - La SQL de acceso a la info del usuario es incorrecta, utiliza un campo que no existe.
         - Cambiar el campo `id` por `uid`.
-    - El HTTP status code de respuesta exitosa es 500, en lugar de 200.
+    - El HTTP status code de respuesta exitosa del GET es 201 (Created), en lugar de 200 (OK).
+    - El handling de las rutas no es correcto, ya que el evaluación del path y el método es incorrecto.
+        - Cambiar a una condición AND en lugar de OR.
