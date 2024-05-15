@@ -41,7 +41,7 @@ func (h *UserHandler) Info(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *UserHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/get-user-info" || r.Method == http.MethodGet {
+	if r.URL.Path == "/get-user-info" || r.Method == http.MethodPost {
 		h.Info(w, r)
 		return
 	}
