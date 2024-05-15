@@ -6,7 +6,7 @@
     - La cadena de conexión a la base de datos no es correcta, ya que está hardcodeada.
         - Hay que utilizar los valores del Makefile, leyendo de variables de entorno.
     - El verbo HTTP es POST y no GET.
-        - Probar nevagar a `http://localhost:8080/get-usr-nfo?uid=6ba7b810-9dad-11d1-80b4-00c04fd430c8` y se obtiene un error 404.
+        - Probar a navegar a `http://localhost:8080/get-usr-nfo?uid=6ba7b810-9dad-11d1-80b4-00c04fd430c8` y se obtiene un error 404.
         - Probar cURL con `curl -X POST http://localhost:8080/get-usr-nfo?uid=6ba7b810-9dad-11d1-80b4-00c04fd430c8` y se obtiene un error 500 Bad Request, porque la tabla `users` no existe en la base de datos.
     - El endpoint es `/get-usr-nfo` y no `/get-user-info`.
     - El User ID, obtenido de la query string, se está convirtiendo a entero, en lugar de un UUID.
