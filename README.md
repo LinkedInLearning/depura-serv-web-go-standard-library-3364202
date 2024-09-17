@@ -32,7 +32,7 @@ El curso está dividido en dos secciones, cada una con su propio directorio:
 
 **Manuel de la Peña**
 
-Echa un vistazo a mis otros cursos en [LinkedIn Learning](https://www.linkedin.com/learning/instructors/).
+Echa un vistazo a mis otros cursos en [LinkedIn Learning](https://www.linkedin.com/learning/instructors/manuel-de-la-pena).
 
 [0]: # (Replace these placeholder URLs with actual course URLs)
 [lil-course-url]: https://www.linkedin.com/learning/depura-el-codigo-servicio-web-en-go-con-standard-library
